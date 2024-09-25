@@ -1,0 +1,63 @@
+.cart-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px; /* Space between cart summary and payment form */
+  }
+  .cart-summary-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    width: calc(50% - 20px); /* Adjust to fit 2 items per row */
+    box-sizing: border-box;
+  }
+  .cart-item-image {
+    width: 60px; /* Small size */
+    height: 60px; /* Small size */
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  .payment-container {
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for better contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for better emphasis */
+    max-width: 800px; /* Maximum width for larger screens */
+    margin: auto; /* Center container horizontally */
+  }
+  h2 {
+    margin-top: 0; /* Remove top margin from headings */
+  }
+  #payment-form {
+    margin-top: 20px;
+  }
+  label {
+    display: block; /* Block display for labels */
+    margin-bottom: 8px; /* Space between label and input */
+  }
+  input[type="text"], input[type="tel"], textarea {
+    width: 100%; /* Full width for inputs */
+    padding: 8px; /* Padding for better spacing */
+    border: 1px solid #ddd; /* Border for inputs */
+    border-radius: 4px; /* Rounded corners for inputs */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    margin-bottom: 12px; /* Space between input fields */
+  }
+  textarea {
+    resize: vertical; /* Allow vertical resizing only */
+    height: 100px; /* Default height */
+  }
+  button {
+    background-color: #007bff; /* Primary button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Padding for button */
+    border-radius: 4px; /* Rounded corners for button */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size for button */
+  }
+  button:hover {
+    background-color: #0056b3; /* Darker color on hover */
+  }

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment</title>
+  <link rel="stylesheet" href="payment.css">
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #333;
+      font-family: Arial, sans-serif;
+    }
+    .payment-container {
+      padding: 20px;
+      background-color: #f89579;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: auto;
+    }
+    h2, h4 {
+      margin-top: 0;
+      color: #000000;
+    }
+    .cart-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .cart-summary-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: #ffffff;
+    }
+    .cart-item-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #f6251a;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      display: none; /* Hide initially */
+      margin: 20px auto; /* Center the button */
+      transition: background-color 0.3s ease-in-out;
+    }
+    button:hover {
+      background-color: #d9190d;
+    }
+    #total-amount {
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #272525;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <div class="payment-container">
+      <h2>Your Cart</h2>
+      <div id="cart-summary" class="cart-summary"></div>
+      
+      <div id="total-amount"></div>
+
+      <h2>Complete Your Payment</h2>
+      <iframe id="payment-form" src="https://docs.google.com/forms/d/e/1FAIpQLSdXy5QxBLcgLn4lRu_PRzzp3Qmb9bNYEYrkB6geXHd0NxZDCw/viewform?embedded=true" width="640" height="1698" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+      <button id="payment-success-btn" onclick="handleButtonClick()">Payment Done</button>
+    </div>
+  </main>
+  
+  <script>
+    function displayCartSummary() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartSummary = document.getElementById('cart-summary');
+      cartSummary.innerHTML = '';
+      cart.forEach(item => {
+        cartSummary.innerHTML += `
+          <div class="cart-summary-item">
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-summary-details">
+              <h4>${item.name}</h4>
+              <p>Price: $${item.price.toFixed(2)}</p>
+              <p>Quantity: ${item.quantity}</p>
+            </div>
+          </div>
+        `;
+      });
+
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      document.getElementById('total-amount').innerText = `Total Amount: $${totalPrice.toFixed(2)}`;
+    }
+
+    function handleFormSubmit() {
+      localStorage.removeItem('cart');
+      alert('Payment Successful');
+      setTimeout(function() {
+        window.location.href = 'index.html'; // Redirect after 3 seconds
+      }, 3000);
+    }
+
+    function handleButtonClick() {
+      handleFormSubmit();
+    }
+
+    // Simulate showing the button after a delay (replace with actual form submission detection if possible)
+    function showPaymentButton() {
+      const paymentButton = document.getElementById('payment-success-btn');
+      paymentButton.style.display = 'block'; // Show button after submission
+    }
+
+    // Call this function when the iframe is loaded
+    document.getElementById('payment-form').onload = function() {
+      // Show the payment button after a delay (e.g., 2 seconds, adjust as needed)
+      setTimeout(showPaymentButton, 2000);
+    };
+
+    window.addEventListener('load', function() {
+      displayCartSummary();
+    });
+  </script>
+</body>
+</html>
